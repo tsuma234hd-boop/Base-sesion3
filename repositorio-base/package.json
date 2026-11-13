@@ -1,0 +1,24 @@
+{
+  "name": "saludya-copago-base",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Repositorio base de la sesión 2 del Módulo 1: SaludYa como monolito modular y laboratorio de SOLID (ejemplo de clase: sistemas externos simulados).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "tsx saludya/src/main.ts",
+    "mapa": "node saludya/scripts/mapa-modulos.mjs",
+    "test": "vitest run",
+    "test:arquitectura": "vitest run saludya/test/arquitectura-modular",
+    "test:lab1": "vitest run saludya/test/copagos",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "tsx": "^4.19.0",
+    "@types/node": "^20.14.0"
+  }
+}
