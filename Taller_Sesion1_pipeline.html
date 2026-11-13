@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuaderno del grupo · Sesión 1</title>
+<style>
+  :root { --ink:#151515; --body:#353535; --muted:#6F6F6F; --line:#D9D9D4; --soft:#F3F3F0; }
+  * { box-sizing: border-box; }
+  html { background:#FFFFFF; }
+  body { margin:0; color:var(--body); background:#FFFFFF; font-family: Georgia, "Times New Roman", Times, serif; font-size:18px; line-height:1.5; }
+  .sans, .kicker, table, label, button, select, input, textarea, .tag, .hint, summary { font-family: Arial, Helvetica, sans-serif; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 80px; }
+  h1, h2, h3 { color:var(--ink); font-weight:normal; line-height:1.15; margin:0 0 .4em; }
+  h1 { font-size: 34px; }
+  h2 { font-size: 25px; }
+  h3 { font-family: Arial, Helvetica, sans-serif; font-size: 14px; letter-spacing:.04em; text-transform:uppercase; margin: 1.1em 0 .3em; font-weight:bold; }
+  p { margin: 0 0 .7em; }
+  ul { margin: .2em 0 .7em 1.2em; padding:0; }
+  li { margin: .15em 0; }
+  .kicker { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 30px 0 8px; }
+  .rule { border-top: 1px solid var(--ink); margin: 10px 0 18px; }
+  .top { position: sticky; top: 0; background:#FFFFFF; border-bottom: 1px solid var(--line); z-index: 5; padding: 10px 0; }
+  .top .wrap { padding-bottom: 0; display:flex; gap:14px; align-items:center; flex-wrap:wrap; font-family: Arial, Helvetica, sans-serif; font-size:14px; }
+  select, input[type=text], textarea { font-size: 15px; color: var(--ink); border: 1px solid var(--muted); background:#FFFFFF; padding: 7px 9px; width:100%; border-radius:0; }
+  select { width:auto; }
+  textarea { min-height: 84px; resize: vertical; line-height: 1.4; }
+  label { display:block; font-size: 14px; color: var(--ink); margin: 14px 0 4px; }
+  table { border-collapse: collapse; width:100%; font-size: 15px; }
+  th, td { border-bottom: 1px solid var(--line); padding: 7px 8px; text-align:left; vertical-align: top; }
+  td.k { width: 130px; font-weight: bold; color: var(--ink); }
+  .two { display:flex; gap: 28px; flex-wrap: wrap; }
+  .two > div { flex: 1 1 340px; min-width: 0; }
+  .fig { text-align:center; margin: 6px 0 14px; }
+  .fig svg { max-width: 100%; height: auto; max-height: 300px; }
+  .analogy { font-style: italic; color: var(--ink); font-size: 20px; }
+  .hint { font-size: 13px; color: var(--muted); }
+  .tag { display:inline-block; font-size: 11px; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--ink); padding: 2px 8px; color: var(--ink); margin-left: 8px; vertical-align: middle; }
+  .esc { border: 1px solid var(--line); padding: 12px 14px; margin: 10px 0; display:block; cursor:pointer; }
+  .esc:hover { border-color: var(--ink); }
+  .esc.sel { border: 2px solid var(--ink); padding: 11px 13px; }
+  .esc .head { display:flex; gap:10px; align-items:center; font-family: Arial, Helvetica, sans-serif; color: var(--ink); font-weight:bold; font-size: 16px; margin-bottom: 4px; }
+  .esc .head input { margin: 0; }
+  .esc .letra { font-size: 20px; }
+  .esc p { margin: 0 0 6px; font-size: 16px; }
+  .esc dl { margin: 0; font-size: 15px; }
+  .esc dt { font-family: Arial, Helvetica, sans-serif; font-weight:bold; color: var(--ink); font-size: 13px; text-transform: uppercase; letter-spacing:.04em; margin-top: 6px; }
+  .esc dd { margin: 0; }
+  button { font-size: 14px; color: var(--ink); background:#FFFFFF; border: 1px solid var(--ink); padding: 8px 14px; cursor: pointer; border-radius:0; }
+  button:hover { background: var(--ink); color:#FFFFFF; }
+  button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .status { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--muted); }
+  .toast { position: fixed; right: 16px; bottom: 16px; background: var(--ink); color:#FFFFFF; font-family: Arial, Helvetica, sans-serif; font-size: 14px; padding: 10px 14px; display:none; z-index: 10; }
+  @media (max-width: 640px) { body { font-size: 17px; } h1 { font-size: 28px; } td.k { width: 100px; } }
+  #impresion { display:none; }
+  #impresion h1 { font-size: 22pt; }
+  #impresion h2 { font-size: 13pt; margin: 14pt 0 4pt; border-top: 1px solid var(--ink); padding-top: 6pt; }
+  #impresion p, #impresion li, #impresion td { font-size: 10.5pt; line-height: 1.4; }
+  #impresion .txt { white-space: pre-wrap; margin: 0 0 6pt; }
+  #impresion .vacio { color: var(--muted); font-style: italic; }
+  #impresion table { font-size: 10pt; }
+  #impresion .sec { page-break-inside: avoid; break-inside: avoid; }
+  #impresion svg { max-width: 62%; max-height: 190px; height: auto; }
+  #impresion .pie { margin-top: 14pt; font-family: Arial, Helvetica, sans-serif; font-size: 8.5pt; color: var(--muted); }
+  @page { size: letter; margin: 16mm; }
+  @media print {
+    html, body { background:#FFFFFF; }
+    .top, .wrap, .toast { display:none !important; }
+    #impresion { display:block; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <label for="e" style="margin:0">Estilo que les tocó</label>
+  <select id="e" aria-label="Estilo que les tocó"></select>
+  <span class="status" id="saved"></span>
+</div></div>
+
+<div class="wrap">
+  <div class="kicker">Diplomado en Desarrollo de Software Avanzado · Módulo 1 · Sesión 1 · Taller de grupo</div>
+  <h1>Cuaderno del grupo</h1>
+  <div class="rule"></div>
+
+  <div id="intro">
+    <p>Elijan arriba el <strong>estilo arquitectónico que les tocó</strong>. Aparecerá su ficha y los siete escenarios.</p>
+    <p class="hint">Lo que escriban se guarda en este navegador. Al final descarguen el cuaderno: si cambian de computador o borran los datos del navegador, se pierde.</p>
+  </div>
+
+  <div id="app" hidden>
+    <h2 id="titulo"></h2>
+
+    <label for="integrantes">Integrantes del grupo</label>
+    <textarea id="integrantes" style="min-height:56px" data-k="integrantes" placeholder="Nombres y apellidos"></textarea>
+
+    <div class="kicker">1 · Conozcan su estilo</div>
+    <div id="ficha"></div>
+
+    <div class="kicker">2 · Escojan el escenario que mejor le queda a su estilo</div>
+    <p>Lean los siete escenarios y marquen el que <strong>mejor le queda a su estilo</strong>. Si dos les parecen buenos, escojan uno y expliquen por qué.</p>
+    <div id="escenarios"></div>
+
+    <div class="kicker">3 · Expliquen sus razones</div>
+    <label for="r1">¿Qué es lo más importante que pide el escenario que escogieron?</label>
+    <textarea id="r1" data-k="r_pide"></textarea>
+    <label for="r2">¿Por qué su estilo responde a eso? ¿Por qué ese escenario necesita ese estilo?</label>
+    <textarea id="r2" data-k="r_por_que"></textarea>
+    <label for="r3">¿Qué se sacrifica o se pierde al usar este estilo en ese escenario?</label>
+    <textarea id="r3" data-k="r_sacrifica"></textarea>
+    <label for="r4">Opcional: ¿cómo se vería? Un dibujo sencillo de cajas y flechas, a mano o en el computador. Anoten aquí el nombre del archivo o el enlace.</label>
+    <input type="text" id="r4" data-k="r_dibujo">
+
+    <div class="kicker">4 · Entregar</div>
+    <p>Para entregar con todo diligenciado: pulsen <strong>Imprimir o guardar como PDF (carta)</strong>. En el cuadro de impresión elijan <strong>Guardar como PDF</strong> y tamaño de papel <strong>Carta (Letter)</strong>. Antes de imprimir, revisen que todos los campos estén completos.</p>
+    <p>También pueden descargar el cuaderno como texto (.md), que se abre con cualquier editor. Entreguen por el medio que indique el docente.</p>
+    <p>
+      <button type="button" id="pr">Imprimir o guardar como PDF (carta)</button>
+      <button type="button" id="dl">Descargar cuaderno (.md)</button>
+      <button type="button" id="cp">Copiar al portapapeles</button>
+      <button type="button" id="rs">Borrar este cuaderno</button>
+    </p>
+  </div>
+</div>
+<div id="impresion"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+var SVG = {"microservicios": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 420 270\" width=\"420\" height=\"270\" role=\"img\" aria-label=\"Microservicios: servicios autónomos, cada uno con su base de datos, tras un API Gateway\"><title>Microservicios: servicios autónomos, cada uno con su base de datos, tras un API Gateway</title><rect width=\"100%\" height=\"100%\" fill=\"#FFFFFF\"/><defs><marker id=\"h\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker><marker id=\"hs\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker></defs><rect x=\"130\" y=\"10\" width=\"160\" height=\"40\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"210.0\" y=\"34.5\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">API Gateway</text><rect x=\"15\" y=\"95\" width=\"120\" height=\"50\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"75.0\" y=\"116.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Pedidos</text><text x=\"75.0\" y=\"132.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">servicio</text><path d=\"M35,198 a40.0,8 0 0,0 80,0 a40.0,8 0 0,0 -80,0 v38 a40.0,8 0 0,0 80,0 v-38\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"75.0\" y=\"224.8\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#151515\">BD propia</text><line x1=\"75\" y1=\"145\" x2=\"75\" y2=\"190\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><rect x=\"150\" y=\"95\" width=\"120\" height=\"50\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"210.0\" y=\"116.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Pagos</text><text x=\"210.0\" y=\"132.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">servicio</text><path d=\"M170,198 a40.0,8 0 0,0 80,0 a40.0,8 0 0,0 -80,0 v38 a40.0,8 0 0,0 80,0 v-38\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"210.0\" y=\"224.8\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#151515\">BD propia</text><line x1=\"210\" y1=\"145\" x2=\"210\" y2=\"190\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><rect x=\"285\" y=\"95\" width=\"120\" height=\"50\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"345.0\" y=\"116.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Repartidores</text><text x=\"345.0\" y=\"132.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">servicio</text><path d=\"M305,198 a40.0,8 0 0,0 80,0 a40.0,8 0 0,0 -80,0 v38 a40.0,8 0 0,0 80,0 v-38\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"345.0\" y=\"224.8\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#151515\">BD propia</text><line x1=\"345\" y1=\"145\" x2=\"345\" y2=\"190\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"170\" y1=\"50\" x2=\"90\" y2=\"95\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"210\" y1=\"50\" x2=\"210\" y2=\"95\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"250\" y1=\"50\" x2=\"330\" y2=\"95\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"135\" y1=\"120\" x2=\"150\" y2=\"120\" stroke=\"#151515\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\" marker-end=\"url(#h)\"/><line x1=\"270\" y1=\"120\" x2=\"285\" y2=\"120\" stroke=\"#151515\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\" marker-end=\"url(#h)\"/><text x=\"210\" y=\"264\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">comunicación por red: HTTP o eventos</text></svg>", "monolito-modular": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 260\" width=\"360\" height=\"260\" role=\"img\" aria-label=\"Monolito modular: una unidad desplegable con módulos de negocio de fronteras estrictas\"><title>Monolito modular: una unidad desplegable con módulos de negocio de fronteras estrictas</title><rect width=\"100%\" height=\"100%\" fill=\"#FFFFFF\"/><defs><marker id=\"h\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker><marker id=\"hs\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker></defs><rect x=\"10\" y=\"10\" width=\"340\" height=\"175\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\" stroke-dasharray=\"6 4\"/><text x=\"180.0\" y=\"102.0\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\"></text><text x=\"20\" y=\"28\" text-anchor=\"start\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" fill=\"#6F6F6F\">1 unidad desplegable</text><rect x=\"30\" y=\"42\" width=\"140\" height=\"50\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"100.0\" y=\"63.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Citas</text><text x=\"100.0\" y=\"79.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">API pública del módulo</text><rect x=\"190\" y=\"42\" width=\"140\" height=\"50\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"260.0\" y=\"63.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Pacientes</text><text x=\"260.0\" y=\"79.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">API pública del módulo</text><rect x=\"30\" y=\"118\" width=\"140\" height=\"50\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"100.0\" y=\"139.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Agenda</text><text x=\"100.0\" y=\"155.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">API pública del módulo</text><rect x=\"190\" y=\"118\" width=\"140\" height=\"50\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"260.0\" y=\"139.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Notificaciones</text><text x=\"260.0\" y=\"155.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">API pública del módulo</text><line x1=\"170\" y1=\"67\" x2=\"190\" y2=\"67\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"100\" y1=\"92\" x2=\"100\" y2=\"118\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"170\" y1=\"143\" x2=\"190\" y2=\"143\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><path d=\"M110,208 a70.0,8 0 0,0 140,0 a70.0,8 0 0,0 -140,0 v36 a70.0,8 0 0,0 140,0 v-36\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"180.0\" y=\"226.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Base de datos</text><text x=\"180.0\" y=\"241.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">un esquema por módulo</text><line x1=\"180\" y1=\"185\" x2=\"180\" y2=\"200\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/></svg>", "pipeline": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 150\" width=\"600\" height=\"150\" role=\"img\" aria-label=\"Tuberías y filtros: datos que pasan por etapas independientes\"><title>Tuberías y filtros: datos que pasan por etapas independientes</title><rect width=\"100%\" height=\"100%\" fill=\"#FFFFFF\"/><defs><marker id=\"h\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker><marker id=\"hs\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker></defs><path d=\"M8,48 a40.0,8 0 0,0 80,0 a40.0,8 0 0,0 -80,0 v44 a40.0,8 0 0,0 80,0 v-44\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"48.0\" y=\"70.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Fuente</text><text x=\"48.0\" y=\"85.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">sensores</text><rect x=\"112\" y=\"45\" width=\"82\" height=\"50\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"153.0\" y=\"66.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Validar</text><text x=\"153.0\" y=\"81.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">filtro</text><rect x=\"214\" y=\"45\" width=\"82\" height=\"50\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"255.0\" y=\"66.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Convertir</text><text x=\"255.0\" y=\"81.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">filtro</text><rect x=\"316\" y=\"45\" width=\"82\" height=\"50\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"357.0\" y=\"66.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Agregar</text><text x=\"357.0\" y=\"81.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">filtro</text><rect x=\"418\" y=\"45\" width=\"82\" height=\"50\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"459.0\" y=\"66.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Evaluar</text><text x=\"459.0\" y=\"81.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">filtro</text><path d=\"M520,48 a35.0,8 0 0,0 70,0 a35.0,8 0 0,0 -70,0 v44 a35.0,8 0 0,0 70,0 v-44\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"555.0\" y=\"78.2\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Destino</text><line x1=\"88\" y1=\"70\" x2=\"112\" y2=\"70\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"194\" y1=\"70\" x2=\"214\" y2=\"70\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"296\" y1=\"70\" x2=\"316\" y2=\"70\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"398\" y1=\"70\" x2=\"418\" y2=\"70\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"500\" y1=\"70\" x2=\"520\" y2=\"70\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><text x=\"300\" y=\"130\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" fill=\"#6F6F6F\">cada flecha es una tubería: stream, cola o archivo</text></svg>", "microkernel": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 250\" width=\"360\" height=\"250\" role=\"img\" aria-label=\"Microkernel: núcleo estable y plugins conectados por una API de extensiones\"><title>Microkernel: núcleo estable y plugins conectados por una API de extensiones</title><rect width=\"100%\" height=\"100%\" fill=\"#FFFFFF\"/><defs><marker id=\"h\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker><marker id=\"hs\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker></defs><rect x=\"110\" y=\"85\" width=\"140\" height=\"80\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"180.0\" y=\"113.3\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Núcleo</text><text x=\"180.0\" y=\"129.6\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">estable, mínimo</text><text x=\"180.0\" y=\"145.8\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">registro de plugins</text><rect x=\"10\" y=\"12\" width=\"110\" height=\"38\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"65.0\" y=\"35.2\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Plugin UML</text><rect x=\"240\" y=\"12\" width=\"110\" height=\"38\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"295.0\" y=\"35.2\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Plugin circuitos</text><rect x=\"10\" y=\"200\" width=\"110\" height=\"38\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"65.0\" y=\"223.2\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Plugin química</text><rect x=\"240\" y=\"200\" width=\"110\" height=\"38\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"295.0\" y=\"223.2\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Plugin …</text><line x1=\"120\" y1=\"50\" x2=\"140\" y2=\"85\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"240\" y1=\"50\" x2=\"220\" y2=\"85\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"120\" y1=\"200\" x2=\"140\" y2=\"165\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"240\" y1=\"200\" x2=\"220\" y2=\"165\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><text x=\"180\" y=\"182\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" fill=\"#151515\" font-weight=\"bold\">API de extensiones</text></svg>", "capas": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 260\" width=\"360\" height=\"260\" role=\"img\" aria-label=\"Estilo en capas: presentación, negocio, persistencia y base de datos\"><title>Estilo en capas: presentación, negocio, persistencia y base de datos</title><rect width=\"100%\" height=\"100%\" fill=\"#FFFFFF\"/><defs><marker id=\"h\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker><marker id=\"hs\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker></defs><rect x=\"70\" y=\"14\" width=\"220\" height=\"44\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"180.0\" y=\"32.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Presentación</text><text x=\"180.0\" y=\"48.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">controladores, vistas</text><line x1=\"180\" y1=\"58\" x2=\"180\" y2=\"74\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><rect x=\"70\" y=\"76\" width=\"220\" height=\"44\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"180.0\" y=\"94.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Negocio</text><text x=\"180.0\" y=\"110.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">servicios, reglas</text><line x1=\"180\" y1=\"120\" x2=\"180\" y2=\"136\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><rect x=\"70\" y=\"138\" width=\"220\" height=\"44\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"180.0\" y=\"156.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Persistencia</text><text x=\"180.0\" y=\"172.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">repositorios, SQL</text><line x1=\"180\" y1=\"182\" x2=\"180\" y2=\"198\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><path d=\"M120,208 a60.0,8 0 0,0 120,0 a60.0,8 0 0,0 -120,0 v34 a60.0,8 0 0,0 120,0 v-34\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"180.0\" y=\"233.2\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Base de datos</text><text x=\"0\" y=\"0\" transform=\"translate(332 130) rotate(90)\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" fill=\"#6F6F6F\">solo hacia abajo</text><line x1=\"315\" y1=\"30\" x2=\"315\" y2=\"230\" stroke=\"#6F6F6F\" stroke-width=\"1\" marker-end=\"url(#h)\"/></svg>", "eventos": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 420 260\" width=\"420\" height=\"260\" role=\"img\" aria-label=\"Orientado a eventos: productores publican, el broker distribuye y los consumidores reaccionan\"><title>Orientado a eventos: productores publican, el broker distribuye y los consumidores reaccionan</title><rect width=\"100%\" height=\"100%\" fill=\"#FFFFFF\"/><defs><marker id=\"h\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker><marker id=\"hs\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker></defs><rect x=\"10\" y=\"50\" width=\"110\" height=\"48\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"65.0\" y=\"70.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Pedidos</text><text x=\"65.0\" y=\"85.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">productor</text><rect x=\"10\" y=\"150\" width=\"110\" height=\"48\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"65.0\" y=\"170.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Pagos</text><text x=\"65.0\" y=\"185.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">productor</text><rect x=\"160\" y=\"20\" width=\"90\" height=\"210\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"205.0\" y=\"113.3\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Broker</text><text x=\"205.0\" y=\"129.6\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">bus de</text><text x=\"205.0\" y=\"145.8\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">eventos</text><rect x=\"295\" y=\"30\" width=\"115\" height=\"48\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"352.5\" y=\"50.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Correo</text><text x=\"352.5\" y=\"65.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">consumidor</text><rect x=\"295\" y=\"102\" width=\"115\" height=\"48\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"352.5\" y=\"122.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Inventario</text><text x=\"352.5\" y=\"137.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">consumidor</text><rect x=\"295\" y=\"174\" width=\"115\" height=\"48\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"352.5\" y=\"194.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Analítica</text><text x=\"352.5\" y=\"209.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">consumidor</text><line x1=\"120\" y1=\"74\" x2=\"160\" y2=\"74\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"120\" y1=\"174\" x2=\"160\" y2=\"174\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"250\" y1=\"54\" x2=\"295\" y2=\"54\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"250\" y1=\"126\" x2=\"295\" y2=\"126\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"250\" y1=\"198\" x2=\"295\" y2=\"198\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><text x=\"140\" y=\"64\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">publica</text><text x=\"140\" y=\"164\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">publica</text><text x=\"272\" y=\"48\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">recibe</text><text x=\"272\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">recibe</text><text x=\"272\" y=\"192\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">recibe</text><text x=\"205\" y=\"252\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" fill=\"#151515\" font-weight=\"bold\">evento: PedidoPagado</text></svg>", "hexagonal": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 270\" width=\"380\" height=\"270\" role=\"img\" aria-label=\"Arquitectura hexagonal: dominio al centro, puertos y adaptadores, dependencias hacia adentro\"><title>Arquitectura hexagonal: dominio al centro, puertos y adaptadores, dependencias hacia adentro</title><rect width=\"100%\" height=\"100%\" fill=\"#FFFFFF\"/><defs><marker id=\"h\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker><marker id=\"hs\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#151515\"/></marker></defs><polygon points=\"268.0,135.0 229.0,202.5 151.0,202.5 112.0,135.0 151.0,67.5 229.0,67.5\" fill=\"#F3F3F0\" stroke=\"#151515\" stroke-width=\"1.5\"/><polygon points=\"234.0,135.0 212.0,173.1 168.0,173.1 146.0,135.0 168.0,96.9 212.0,96.9\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"190\" y=\"131.4\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#151515\">Dominio</text><text x=\"190\" y=\"147.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"11\" font-weight=\"normal\" fill=\"#353535\">reglas</text><text x=\"190\" y=\"81\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">casos de uso</text><text x=\"190\" y=\"199\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">puertos</text><rect x=\"8\" y=\"20\" width=\"100\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"58.0\" y=\"34.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">HTTP / REST</text><text x=\"58.0\" y=\"49.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">adaptador</text><rect x=\"8\" y=\"215\" width=\"100\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"58.0\" y=\"229.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Pruebas</text><text x=\"58.0\" y=\"244.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">adaptador</text><rect x=\"272\" y=\"20\" width=\"100\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"322.0\" y=\"34.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">PostgreSQL</text><text x=\"322.0\" y=\"49.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">adaptador</text><rect x=\"272\" y=\"117\" width=\"100\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"322.0\" y=\"131.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">Correo</text><text x=\"322.0\" y=\"146.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">adaptador</text><rect x=\"272\" y=\"215\" width=\"100\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#151515\" stroke-width=\"1.5\"/><text x=\"322.0\" y=\"229.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#151515\">SOAP factura</text><text x=\"322.0\" y=\"244.7\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" font-weight=\"normal\" fill=\"#353535\">adaptador</text><line x1=\"108\" y1=\"50\" x2=\"140\" y2=\"82\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"108\" y1=\"225\" x2=\"140\" y2=\"192\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"272\" y1=\"50\" x2=\"240\" y2=\"82\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"272\" y1=\"135\" x2=\"252\" y2=\"135\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><line x1=\"272\" y1=\"225\" x2=\"240\" y2=\"192\" stroke=\"#151515\" stroke-width=\"1.5\" marker-end=\"url(#h)\"/><text x=\"190\" y=\"262\" text-anchor=\"middle\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"10\" fill=\"#6F6F6F\">las flechas = dependencias de código: siempre hacia adentro</text></svg>"};
+
+var ESTILOS = [
+ {id:'capas', n:'Capas', an:'Como un edificio de pisos: cada piso se apoya en el de abajo.', svg:'capas',
+  comp:'Capas técnicas: presentación, negocio y persistencia.', con:'Llamadas en memoria, de arriba hacia abajo.', reg:'Cada capa solo conoce la de abajo.', des:'Una sola unidad.',
+  gana:['Simplicidad; todo el mundo la conoce.','Bajo costo; ideal para empezar.'],
+  pierde:['La lógica de negocio se filtra a controladores o SQL.','Un cambio funcional atraviesa todas las capas.','Todo escala y se despliega junto.'],
+  usa:['Equipo pequeño, presupuesto bajo.','Dominio sencillo: mucho CRUD y algo de lógica.'],
+  evita:['Varios equipos tocan el mismo código y se estorban.','Partes con necesidades de escala muy distintas.'],
+  ej:'La aplicación web empresarial clásica: controladores, servicios y repositorios (Spring, Django, Express).',
+  err:'Capas «hueco» que solo pasan datos sin aportar nada, o capas donde cualquiera llama a cualquiera.'},
+ {id:'modular', n:'Monolito modular', an:'Como un conjunto cerrado: una sola portería, casas separadas con puerta propia.', svg:'monolito-modular',
+  comp:'Módulos por capacidad de negocio (por ejemplo Citas, Pacientes, Facturación).', con:'La interfaz pública de cada módulo (llamadas en memoria).', reg:'Nadie entra a las tablas ni a las clases internas de otro módulo.', des:'Una sola unidad.',
+  gana:['Despliegue y depuración simples, bajo costo.','Orden por negocio: si mañana hay que separar un servicio, la frontera ya existe.'],
+  pierde:['Todo escala junto.','Exige disciplina o herramientas para que los módulos no se mezclen.'],
+  usa:['Producto nuevo que aún está aprendiendo su dominio.','De 1 a 4 equipos. Es la opción por defecto razonable.'],
+  evita:['Muchos equipos necesitan desplegar a ritmos distintos.','Una parte necesita escalar muchísimo más que el resto.'],
+  ej:'Shopify mantiene su núcleo como monolito modular y creó una herramienta (Packwerk) para hacer cumplir las fronteras.',
+  err:'Capas corta horizontal (por técnica); modular corta vertical (por negocio). Se pueden combinar.'},
+ {id:'hexagonal', n:'Hexagonal', an:'Como un portátil con puertos USB: el computador no sabe qué marca de mouse le conectas, solo exige el estándar.', svg:'hexagonal',
+  comp:'Dominio y casos de uso al centro; adaptadores afuera (web, base de datos, correo, SOAP).', con:'Puertos: interfaces definidas por el dominio e implementadas por los adaptadores.', reg:'El código solo apunta hacia adentro (regla de dependencia); el dominio no importa nada de infraestructura.', des:'No lo define: se combina con otros estilos.',
+  gana:['El dominio se prueba sin base de datos.','La infraestructura se cambia sin tocar las reglas.'],
+  pierde:['Más archivos, interfaces e indirección.','Excesivo para un CRUD simple.'],
+  usa:['La lógica de negocio es rica.','Hay muchas integraciones externas o se espera cambiar la infraestructura.'],
+  evita:['La aplicación es casi solo formularios contra una tabla.'],
+  ej:'Alistair Cockburn (2005). «Arquitectura limpia» y «cebolla» son variantes con la misma regla de dependencia.',
+  err:'Creer que define cómo se despliega: organiza el interior de una aplicación, nada más.'},
+ {id:'microkernel', n:'Microkernel', an:'Como una consola de videojuegos con cartuchos: la consola casi no cambia, los juegos se agregan.', svg:'microkernel',
+  comp:'Un núcleo pequeño y estable más plugins independientes.', con:'Una API de extensiones (contrato) y un registro de plugins.', reg:'Los plugins solo hablan con el núcleo a través del contrato.', des:'Núcleo más plugins instalables.',
+  gana:['Se extiende sin tocar el núcleo.','Terceros pueden aportar funciones.'],
+  pierde:['El contrato se vuelve difícil de cambiar: romperlo rompe todos los plugins.','Un plugin defectuoso puede tumbar todo si no se aísla.'],
+  usa:['El producto es una plataforma que otros extienden.','Hay muchas variaciones por cliente o región.'],
+  evita:['Nadie más que tu equipo va a extenderlo.'],
+  ej:'VS Code y sus extensiones, navegadores con extensiones, Jenkins, WordPress, Eclipse.',
+  err:'Dejar que los plugins hagan lo que quieran sin permisos ni aislamiento.'},
+ {id:'pipeline', n:'Pipeline', an:'Como una línea de ensamblaje, o como cat ventas.csv | grep 2026 | sort en la terminal.', svg:'pipeline',
+  comp:'Filtros que reciben datos, los transforman y los entregan.', con:'Tuberías (stream, cola o archivo) entre filtros.', reg:'Cada filtro es independiente y no conoce a los demás.', des:'Variable: desde un proceso hasta varios servicios.',
+  gana:['Cada filtro es simple y se prueba solo.','Los filtros se reordenan, se reemplazan o se reutilizan.'],
+  pierde:['No sirve para interacción compleja con usuarios.','Con muchos pasos pesan la latencia acumulada y el formato intermedio.'],
+  usa:['Hay que procesar datos por etapas: ETL, sensores, imágenes.','Compiladores, CI/CD.'],
+  evita:['El flujo depende de muchas decisiones del usuario a mitad de camino.'],
+  ej:'Pipes de Unix, procesos ETL, compiladores (léxico, sintáctico, semántico, código), pipelines de CI/CD.',
+  err:'Filtros que dependen del estado interno de otros filtros.'},
+ {id:'eventos', n:'Orientado a eventos', an:'Como una emisora de radio: el locutor habla una vez y quien quiera sintoniza.', svg:'eventos',
+  comp:'Productores que publican hechos y consumidores que reaccionan.', con:'Un broker o bus de eventos (RabbitMQ, Kafka, SQS).', reg:'El productor no sabe quién escucha. Los eventos son hechos en pasado: PedidoPagado.', des:'Variable.',
+  gana:['Desacoplamiento: se agregan reacciones sin tocar al emisor.','La cola absorbe picos; cada consumidor escala aparte.'],
+  pierde:['Cuesta depurar: ¿quién reaccionó a qué?','Consistencia eventual: los datos quedan bien «en un rato».','Eventos duplicados o desordenados.'],
+  usa:['Muchas reacciones a un mismo hecho.','Picos que conviene absorber; integración entre sistemas.'],
+  evita:['Necesitas respuesta inmediata y consistente en un flujo simple.'],
+  ej:'Pedido pagado: correo, inventario y analítica reaccionan cada uno por su lado.',
+  err:'Eventos que en realidad son órdenes disfrazadas («haz esto») y flujos imposibles de seguir.'},
+ {id:'microservicios', n:'Microservicios', an:'Como un barrio de casas independientes: cada familia con su cocina y su llave.', svg:'microservicios',
+  comp:'Servicios pequeños alrededor de capacidades de negocio, cada uno con sus propios datos.', con:'Red (HTTP o mensajes); muchas veces, un API Gateway en la entrada.', reg:'Cada servicio se despliega solo y nadie toca la base de datos de otro.', des:'Muchas unidades independientes.',
+  gana:['Equipos autónomos que despliegan sin esperar a otros.','Escalado selectivo y aislamiento de fallos.'],
+  pierde:['Complejidad distribuida: red, latencia, fallos parciales, consistencia.','Costo operativo: pipelines, monitoreo, infraestructura.'],
+  usa:['Hay escala organizacional: varios equipos se estorban en un solo desplegable.','Partes con necesidades de escala muy distintas.'],
+  evita:['Equipo pequeño, MVP o dominio aún desconocido.'],
+  ej:'Netflix migró a microservicios; Segment volvió a un monolito (ver historias reales de la clase).',
+  err:'Monolito distribuido: servicios que comparten base de datos o deben desplegarse juntos. Lo peor de los dos mundos.'}
+];
+
+
+var ESCENARIOS = [
+ {l:'A', n:'FiadoApp', sub:'Una startup local quiere que las tiendas de barrio dejen el cuaderno del fiado.', rows:[
+   ['Qué hace','Registrar ventas, clientes y fiados; enviar recordatorios de pago por WhatsApp; ver un resumen semanal.'],
+   ['Lo que más importa','Que un desarrollador nuevo entienda el código en una semana. Que la app de la tienda responda en menos de 1 s con conexión 4G.'],
+   ['Condiciones','3 desarrolladores junior, sin experiencia en DevOps. Primera versión en 8 semanas. Presupuesto de infraestructura: USD 50 al mes. 300 tiendas el primer año.']]},
+ {l:'B', n:'PagaYa', sub:'Pasarela de pagos para comercios de la región.', rows:[
+   ['Qué hace','Autorizar pagos con tarjeta, PSE y billeteras; notificar al comercio y al cliente; enviar cada pago a antifraude y a contabilidad.'],
+   ['Lo que más importa','Disponibilidad del 99,95 %. Picos de 200 pagos por segundo durante 10 minutos en quincena y 5 por segundo el resto del día. Cada pago queda auditado.'],
+   ['Condiciones','12 desarrolladores en 2 equipos. Regulación financiera. No quieren pagar servidores para el pico las 24 horas.']]},
+ {l:'C', n:'DiagramaU', sub:'Editor de diagramas en línea para universidades.', rows:[
+   ['Qué hace','Dibujar diagramas, guardarlos y compartirlos. Cada facultad, y también empresas externas, quieren agregar sus propias notaciones: UML, circuitos eléctricos, química, planos.'],
+   ['Lo que más importa','Agregar una notación nueva sin modificar ni redesplegar el núcleo. El núcleo se actualiza solo 2 veces al año.'],
+   ['Condiciones','Equipo central de 6 personas. Las extensiones las escriben terceros que no conocen el código del núcleo. 12 universidades.']]},
+ {l:'D', n:'AgroSensor Sinú', sub:'Monitoreo de fincas y del nivel del río en Córdoba.', rows:[
+   ['Qué hace','Sensores envían humedad del suelo y nivel del río cada minuto. Hay que validar las lecturas, convertir unidades, agregarlas por hora y detectar riesgo de inundación.'],
+   ['Lo que más importa','Si hay riesgo de inundación, el SMS de alerta llega al productor en menos de 2 minutos desde la medición.'],
+   ['Condiciones','2 desarrolladores y una ingeniera agrícola. Presupuesto de un proyecto de investigación. 150 fincas, 600 sensores.']]},
+ {l:'E', n:'Domicilios Ya', sub:'Super-app de domicilios en Montería y 10 ciudades más.', rows:[
+   ['Qué hace','Catálogo de restaurantes, pedidos, asignación y seguimiento de repartidores, pagos, notificaciones y promociones que cambian cada día.'],
+   ['Lo que más importa','Entre 12:00 y 14:00 el tráfico se multiplica por 15. Si falla Promociones, la gente debe poder seguir pidiendo. Cada equipo quiere desplegar varias veces al día.'],
+   ['Condiciones','45 desarrolladores en 6 equipos: Restaurantes, Pedidos, Repartidores, Pagos, Notificaciones y Promociones. 80.000 pedidos diarios.']]},
+ {l:'F', n:'BiblioUCC', sub:'Sistema de préstamos de la biblioteca universitaria.', rows:[
+   ['Qué hace','Catálogo, préstamos, renovaciones, reservas y multas por retraso.'],
+   ['Lo que más importa','Que un practicante nuevo haga un cambio pequeño en 2 días. Que el sistema dure unos 10 años. Picos en semana de parciales.'],
+   ['Condiciones','2 desarrolladores de planta y practicantes que rotan cada semestre. Servidores de la universidad. 8.000 usuarios.']]},
+ {l:'G', n:'PagoMatrícula', sub:'Sistema de cobro de matrículas de una universidad.', rows:[
+   ['Qué hace','Calcula el valor de la matrícula según programa, becas, convenios y descuentos; aplica recargo por mora; recibe pagos por PSE, corresponsal bancario y datáfono; concilia con tres bancos y avisa al sistema financiero y a Campus.'],
+   ['Lo que más importa','Las reglas de cobro cambian cada semestre y deben poder cambiarse y probarse sin tocar la integración con los bancos. Cambiar de banco o agregar uno en menos de 2 semanas.'],
+   ['Condiciones','4 desarrolladores. El sistema financiero tiene una interfaz propia que no se puede modificar. Los bancos suelen cambiar cada 2 o 3 años.']]}
+];
+
+var $ = function (id) { return document.getElementById(id); };
+var state = {}, estilo = '';
+
+function esc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function key() { return 'cuaderno-s1-' + estilo; }
+function save() {
+  try { localStorage.setItem(key(), JSON.stringify(state)); $('saved').textContent = 'Guardado en este navegador · ' + new Date().toLocaleTimeString(); }
+  catch (e) { $('saved').textContent = 'No se pudo guardar en el navegador: descarguen el cuaderno.'; }
+}
+function load() { try { return JSON.parse(localStorage.getItem(key()) || '{}'); } catch (e) { return {}; } }
+function toast(m) { var t = $('toast'); t.textContent = m; t.style.display = 'block'; setTimeout(function () { t.style.display = 'none'; }, 2500); }
+function lista(a) { return '<ul>' + a.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
+function porId(id) { return ESTILOS.filter(function (e) { return e.id === id; })[0]; }
+
+function fichaHTML(e) {
+  return '<p class="analogy">' + esc(e.an) + '</p><div class="fig">' + SVG[e.svg] + '</div>' +
+    '<div class="two"><div><h3>Cómo se compone</h3><ul><li><strong>Componentes:</strong> ' + esc(e.comp) + '</li><li><strong>Conectores:</strong> ' + esc(e.con) + '</li><li><strong>Regla:</strong> ' + esc(e.reg) + '</li><li><strong>Despliegue:</strong> ' + esc(e.des) + '</li></ul>' +
+    '<h3>Gana</h3>' + lista(e.gana) + '<h3>Pierde</h3>' + lista(e.pierde) + '</div>' +
+    '<div><h3>Úsalo cuando</h3>' + lista(e.usa) + '<h3>Evítalo cuando</h3>' + lista(e.evita) + '<h3>Ejemplos</h3><p>' + esc(e.ej) + '</p><h3>Cuidado con</h3><p>' + esc(e.err) + '</p></div></div>';
+}
+
+function render() {
+  var est = porId(estilo);
+  $('intro').hidden = true; $('app').hidden = false;
+  $('titulo').textContent = 'Estilo: ' + est.n;
+  $('ficha').innerHTML = fichaHTML(est);
+  $('escenarios').innerHTML = ESCENARIOS.map(function (s) {
+    return '<label class="esc" id="esc' + s.l + '"><span class="head"><input type="radio" name="esc" value="' + s.l + '"><span class="letra">' + s.l + '</span> ' + esc(s.n) + '</span>' +
+      '<p><em>' + esc(s.sub) + '</em></p><dl>' + s.rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl></label>';
+  }).join('');
+  state = load();
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var v = state[el.getAttribute('data-k')]; el.value = (v === undefined ? '' : v);
+  });
+  marcar();
+}
+function marcar() {
+  document.querySelectorAll('.esc').forEach(function (l) { l.classList.remove('sel'); });
+  document.querySelectorAll('input[name="esc"]').forEach(function (r) { r.checked = (r.value === state.escenario); });
+  if (state.escenario && $('esc' + state.escenario)) $('esc' + state.escenario).classList.add('sel');
+}
+
+document.addEventListener('change', function (e) {
+  if (e.target.name === 'esc') { state.escenario = e.target.value; marcar(); save(); }
+});
+document.addEventListener('input', function (e) {
+  var k = e.target.getAttribute && e.target.getAttribute('data-k');
+  if (!k || !estilo) return;
+  state[k] = e.target.value; save();
+});
+
+function pick(v) {
+  estilo = v;
+  try { localStorage.setItem('cuaderno-s1-ultimo', v); } catch (e) {}
+  if (!porId(v)) { $('app').hidden = true; $('intro').hidden = false; return; }
+  history.replaceState(null, '', '?e=' + v);
+  render();
+}
+$('e').innerHTML = '<option value="">Elige…</option>' + ESTILOS.map(function (e) { return '<option value="' + e.id + '">' + esc(e.n) + '</option>'; }).join('');
+$('e').addEventListener('change', function () { pick(this.value); });
+
+function md() {
+  var est = porId(estilo), s = state, v = function (k) { return (s[k] === undefined || s[k] === '') ? '—' : s[k]; };
+  var sc = ESCENARIOS.filter(function (x) { return x.l === s.escenario; })[0];
+  return ['# Cuaderno del grupo · ' + est.n,
+    'Diplomado en Desarrollo de Software Avanzado · Módulo 1 · Sesión 1', '',
+    '**Integrantes:** ' + v('integrantes'), '',
+    '## Escenario que escogimos', sc ? sc.l + ' · ' + sc.n : '—', '',
+    '## Qué es lo más importante que pide el escenario', v('r_pide'), '',
+    '## Por qué nuestro estilo responde a eso', v('r_por_que'), '',
+    '## Qué se sacrifica', v('r_sacrifica'), '',
+    '## Dibujo (opcional)', v('r_dibujo'), '',
+    '_Descargado el ' + new Date().toLocaleString() + '._'].join('\n');
+}
+function hoy() { try { return new Date().toLocaleDateString('es-CO', {day:'numeric', month:'long', year:'numeric'}); } catch (e) { return new Date().toLocaleDateString(); } }
+function txt(v) { return (v === undefined || String(v).trim() === '') ? '<p class="vacio">(sin diligenciar)</p>' : '<p class="txt">' + esc(v) + '</p>'; }
+function impresionHTML() {
+  var est = porId(estilo), s = state;
+  var sc = ESCENARIOS.filter(function (x) { return x.l === s.escenario; })[0];
+  var h = '<div class="kicker" style="margin-top:0">Diplomado en Desarrollo de Software Avanzado · Módulo 1 · Sesión 1 · Taller de grupo</div>' +
+    '<h1>Estilo: ' + esc(est.n) + '</h1><p>Fecha: ' + esc(hoy()) + '</p>' +
+    '<div class="sec"><h2>Integrantes</h2>' + txt(s.integrantes) + '</div>' +
+    '<div class="sec"><h2>Escenario que escogieron</h2>' +
+    (sc ? '<p><strong>' + esc(sc.l) + ' · ' + esc(sc.n) + '.</strong> <em>' + esc(sc.sub) + '</em></p><table>' + sc.rows.map(function (r) { return '<tr><td class="k">' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td></tr>'; }).join('') + '</table>' : '<p class="vacio">(sin escoger)</p>') + '</div>' +
+    '<div class="sec"><h2>¿Qué es lo más importante que pide el escenario?</h2>' + txt(s.r_pide) + '</div>' +
+    '<div class="sec"><h2>¿Por qué su estilo responde a eso?</h2>' + txt(s.r_por_que) + '</div>' +
+    '<div class="sec"><h2>¿Qué se sacrifica al usar este estilo en ese escenario?</h2>' + txt(s.r_sacrifica) + '</div>' +
+    '<div class="sec"><h2>Dibujo (opcional)</h2>' + txt(s.r_dibujo) + '</div>' +
+    '<div class="sec"><h2>Su estilo: ' + esc(est.n) + '</h2><p><em>' + esc(est.an) + '</em></p><div class="fig">' + SVG[est.svg] + '</div>' +
+    '<ul><li><strong>Componentes:</strong> ' + esc(est.comp) + '</li><li><strong>Conectores:</strong> ' + esc(est.con) + '</li><li><strong>Regla:</strong> ' + esc(est.reg) + '</li><li><strong>Despliegue:</strong> ' + esc(est.des) + '</li></ul></div>' +
+    '<p class="pie">Generado desde el cuaderno digital de la sesión 1.</p>';
+  return h;
+}
+function prepararImpresion() { if (estilo) $('impresion').innerHTML = impresionHTML(); }
+window.addEventListener('beforeprint', prepararImpresion);
+$('pr').addEventListener('click', function () {
+  if (!estilo) return;
+  prepararImpresion();
+  window.print();
+});
+$('dl').addEventListener('click', function () {
+  if (!estilo) return;
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([md()], {type: 'text/markdown;charset=utf-8'}));
+  a.download = 'cuaderno_' + estilo + '.md'; document.body.appendChild(a); a.click(); a.remove();
+  toast('Cuaderno descargado.');
+});
+$('cp').addEventListener('click', function () {
+  if (!estilo) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(md()).then(function () { toast('Copiado.'); }, function () { toast('No se pudo copiar: usen Descargar.'); });
+  else toast('No se pudo copiar: usen Descargar.');
+});
+$('rs').addEventListener('click', function () {
+  if (!estilo) return;
+  if (!window.confirm('¿Borrar todo lo escrito en este cuaderno? No se puede deshacer.')) return;
+  try { localStorage.removeItem(key()); } catch (e) {}
+  render(); toast('Cuaderno borrado.');
+});
+
+(function () {
+  var preset = {
+    integrantes: '[Completar con los nombres y apellidos de los integrantes]',
+    escenario: 'D',
+    r_pide: 'Procesar cada lectura de los 600 sensores por etapas encadenadas y en tiempo casi real: recibirla, validarla, convertir unidades, agregarla por hora y detectar riesgo de inundación, de modo que el SMS de alerta llegue al productor en menos de 2 minutos. Lo esencial es transformar un flujo continuo de datos paso a paso, sin que una etapa dependa de la lógica interna de las demás.',
+    r_por_que: 'Porque el problema es, literalmente, una cadena de transformaciones sobre datos: sensores → validación → conversión de unidades → agregación horaria → detección de riesgo → alerta SMS. El estilo Pipeline permite implementar cada etapa como un filtro independiente y simple, que se prueba por separado y se puede reordenar, reemplazar o reutilizar (por ejemplo, cambiar la conversión si se agrega otro tipo de sensor) sin tocar las demás etapas. Además, el flujo no depende de decisiones del usuario a mitad de camino: los datos entran y salen solos, justo el caso de uso recomendado para ETL y procesamiento de sensores. Así se puede cumplir el límite de 2 minutos y mantener el sistema comprensible para 2 desarrolladores y una ingeniera agrícola.',
+    r_sacrifica: 'Cada paso agrega latencia y hay que definir y mantener un formato intermedio entre filtros; si un filtro se cae, se atrasa o recibe lecturas desordenadas o duplicadas, la alerta puede llegar tarde. Por eso hay que sumar monitoreo, reintentos y control de flujo, algo que encarece la operación para un equipo de 2 personas y un presupuesto de investigación. Tampoco es la mejor opción si más adelante el flujo necesita interacción compleja con el usuario o reglas distintas por finca; en ese caso habría que combinar el pipeline con otro estilo.',
+    r_dibujo: 'diagrama_pipeline_agrosensor.svg'
+  };
+  try {
+    if (!localStorage.getItem('cuaderno-s1-pipeline')) {
+      localStorage.setItem('cuaderno-s1-pipeline', JSON.stringify(preset));
+    }
+    localStorage.setItem('cuaderno-s1-ultimo', 'pipeline');
+  } catch (e) {}
+})();
+
+(function () {
+  var q = /[?&]e=([a-z]+)/.exec(location.search), v = q ? q[1] : '';
+  if (!v) { try { v = localStorage.getItem('cuaderno-s1-ultimo') || ''; } catch (e) {} }
+  if (porId(v)) { $('e').value = v; pick(v); }
+})();
+</script>
+</body>
+</html>
